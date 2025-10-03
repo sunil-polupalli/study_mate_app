@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:study_mate_app/Quick%20Access/attendence.dart';
+import 'package:study_mate_app/Quick%20Access/eventscheduler.dart';
+import 'package:study_mate_app/Quick%20Access/group/class_room.dart';
+import 'package:study_mate_app/Quick%20Access/study_tips.dart';
 import 'dart:async';
 import '../theme/app_theme.dart';
 import '../widgets/countdown_timer.dart';
@@ -13,7 +17,8 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
 
@@ -55,10 +60,11 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                     children: [
                       Text(
                         'StudyMate',
-                        style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                          fontWeight: FontWeight.w700,
-                          color: AppTheme.primaryTextColor,
-                        ),
+                        style:
+                            Theme.of(context).textTheme.displayMedium?.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                  color: AppTheme.primaryTextColor,
+                                ),
                       ),
                       // CircleAvatar(
                       //   radius: 22,
@@ -165,28 +171,52 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                     childAspectRatio: 1.1,
                     children: [
                       QuickAccessCard(
-                        title: 'Join Room',
+                        title: 'Notes',
                         icon: Icons.groups_rounded,
                         color: AppTheme.secondaryColor,
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ClassRoom(),
+                              ));
+                        },
                       ),
                       QuickAccessCard(
-                        title: 'Notes',
+                        title: 'Scheduler',
                         icon: Icons.cloud_upload_rounded,
                         color: AppTheme.primaryColor,
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EventSchedulerScreen(),
+                              ));
+                        },
                       ),
                       QuickAccessCard(
-                        title: 'Flashcards',
+                        title: 'Attendence Calc',
                         icon: Icons.quiz_rounded,
                         color: AppTheme.accentColor,
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Attendence(),
+                              ));
+                        },
                       ),
                       QuickAccessCard(
-                        title: 'AI Chatbot',
+                        title: 'Study Tips',
                         icon: Icons.chat_bubble_rounded,
                         color: AppTheme.warningColor,
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => StudyTips(),
+                              ));
+                        },
                       ),
                     ],
                   ),
@@ -244,9 +274,9 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       Text(
                         'View All',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: AppTheme.primaryColor,
-                          fontWeight: FontWeight.w600,
-                        ),
+                              color: AppTheme.primaryColor,
+                              fontWeight: FontWeight.w600,
+                            ),
                       ),
                     ],
                   ),

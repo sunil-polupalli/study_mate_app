@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:study_mate_app/auth/login_mediator.dart';
 import 'screens/home_screen.dart';
 import 'screens/notes_screen.dart';
 import 'screens/ai_helper_screen.dart';
@@ -8,12 +9,18 @@ import 'screens/rooms_screen.dart';
 import 'screens/profile_screen.dart';
 import 'theme/app_theme.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Supabase.initialize(
+      url: 'https://dlkhzxirzqkwkjgltakq.supabase.co',
+      anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRsa2h6eGlyenFrd2tqZ2x0YWtxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg1NDkxMjEsImV4cCI6MjA3NDEyNTEyMX0.zZzOUkSvQULHzeGFaa0vUbkmDpJ__J8FGBXXcQtTlwA'
+  );
   if(kIsWeb){
-    runApp(DevicePreview(builder:(context) => const StudyMateApp(),));
+    runApp(DevicePreview(builder:(context) => StudyMateApp()));
   }else{
-    runApp(const StudyMateApp());
+    runApp(StudyMateApp(),);
   }
 
 }
@@ -26,7 +33,7 @@ class StudyMateApp extends StatelessWidget {
     return MaterialApp(
       title: 'StudyMate',
       theme: AppTheme.darkTheme,
-      home: const MainScreen(),
+      home: AuthGate(),
       debugShowCheckedModeBanner: false,
     );
   }
