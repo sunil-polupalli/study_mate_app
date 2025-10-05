@@ -187,11 +187,11 @@ class _HomeScreenState extends State<HomeScreen>
                         icon: Icons.cloud_upload_rounded,
                         color: AppTheme.primaryColor,
                         onTap: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //       builder: (context) => EventSchedulerScreen(),
-                          //     ));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SchedulerPage(),
+                              ));
                         },
                       ),
                       QuickAccessCard(
@@ -202,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen>
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => Attendence(),
+                                builder: (context) => AttendanceCalcPage(),
                               ));
                         },
                       ),
@@ -214,7 +214,7 @@ class _HomeScreenState extends State<HomeScreen>
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => StudyTips(),
+                                builder: (context) => StudyTipsPage(),
                               ));
                         },
                       ),
