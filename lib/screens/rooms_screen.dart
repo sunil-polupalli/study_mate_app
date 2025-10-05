@@ -1,4 +1,6 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:study_mate_app/screens/call_screen.dart';
 import '../theme/app_theme.dart';
 
 class RoomsScreen extends StatefulWidget {
@@ -161,6 +163,7 @@ class _RoomsScreenState extends State<RoomsScreen> with TickerProviderStateMixin
                             ElevatedButton(
                               onPressed: () {
                                 // Join room logic
+                                _joinRoom(_roomCodeController.text);
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white,
@@ -374,7 +377,7 @@ class _RoomsScreenState extends State<RoomsScreen> with TickerProviderStateMixin
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    '\${room['']} members',
+                    '${room['members']} members',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ],
@@ -382,6 +385,7 @@ class _RoomsScreenState extends State<RoomsScreen> with TickerProviderStateMixin
               ElevatedButton(
                 onPressed: () {
                   // Join room logic
+                  _joinRoom(room['name']);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: room['color'],
@@ -400,5 +404,22 @@ class _RoomsScreenState extends State<RoomsScreen> with TickerProviderStateMixin
         ],
       ),
     );
+  }
+
+  void _joinRoom(String roomID) {
+    if (roomID.isNotEmpty) {
+      final String userID = (Random().nextInt(900000) + 100000).toString();
+      final String userName = 'user_$userID';
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CallScreen(
+            roomID: roomID,
+            localUserID: userID,
+            localUserName: userName,
+          ),
+        ),
+      );
+    }
   }
 }

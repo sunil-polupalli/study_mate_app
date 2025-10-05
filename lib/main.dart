@@ -11,18 +11,19 @@ import 'theme/app_theme.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Supabase.initialize(
       url: 'https://dlkhzxirzqkwkjgltakq.supabase.co',
-      anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRsa2h6eGlyenFrd2tqZ2x0YWtxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg1NDkxMjEsImV4cCI6MjA3NDEyNTEyMX0.zZzOUkSvQULHzeGFaa0vUbkmDpJ__J8FGBXXcQtTlwA'
-  );
-  if(kIsWeb){
-    runApp(DevicePreview(builder:(context) => const StudyMateApp()));
-  }else{
-    runApp(const StudyMateApp(),);
+      anonKey:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRsa2h6eGlyenFrd2tqZ2x0YWtxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg1NDkxMjEsImV4cCI6MjA3NDEyNTEyMX0.zZzOUkSvQULHzeGFaa0vUbkmDpJ__J8FGBXXcQtTlwA');
+  if (kIsWeb) {
+    runApp(DevicePreview(builder: (context) => const StudyMateApp()));
+  } else {
+    runApp(
+      const StudyMateApp(),
+    );
   }
-
 }
 
 class StudyMateApp extends StatelessWidget {
