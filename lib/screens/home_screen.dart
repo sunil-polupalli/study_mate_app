@@ -187,11 +187,11 @@ class _HomeScreenState extends State<HomeScreen>
                         icon: Icons.cloud_upload_rounded,
                         color: AppTheme.primaryColor,
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => EventSchedulerScreen(),
-                              ));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => EventSchedulerScreen(),
+                          //     ));
                         },
                       ),
                       QuickAccessCard(
