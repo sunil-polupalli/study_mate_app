@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import '../theme/app_theme.dart';
+
 
 class CountdownTimer extends StatefulWidget {
   const CountdownTimer({super.key});
@@ -47,9 +47,9 @@ class _CountdownTimerState extends State<CountdownTimer> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         _buildTimeUnit(_timeLeft.inHours, 'Hours'),
-        Text(':', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w700)),
+        const Text(':', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w700)),
         _buildTimeUnit(_timeLeft.inMinutes % 60, 'Minutes'),
-        Text(':', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w700)),
+        const Text(':', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w700)),
         _buildTimeUnit(_timeLeft.inSeconds % 60, 'Seconds'),
       ],
     );

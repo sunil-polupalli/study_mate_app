@@ -3,7 +3,6 @@ import 'package:study_mate_app/Quick%20Access/attendence.dart';
 import 'package:study_mate_app/Quick%20Access/eventscheduler.dart';
 import 'package:study_mate_app/Quick%20Access/group/class_room.dart';
 import 'package:study_mate_app/Quick%20Access/study_tips.dart';
-import 'dart:async';
 import '../theme/app_theme.dart';
 import '../widgets/countdown_timer.dart';
 import '../widgets/quick_access_card.dart';
@@ -178,7 +177,7 @@ class _HomeScreenState extends State<HomeScreen>
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => ClassRoom(),
+                                builder: (context) => const ClassRoom(),
                               ));
                         },
                       ),
@@ -190,7 +189,7 @@ class _HomeScreenState extends State<HomeScreen>
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => SchedulerPage(),
+                                builder: (context) => const SchedulerPage(),
                               ));
                         },
                       ),
@@ -202,7 +201,7 @@ class _HomeScreenState extends State<HomeScreen>
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => AttendanceCalcPage(),
+                                builder: (context) => const AttendanceCalcPage(),
                               ));
                         },
                       ),
@@ -214,7 +213,7 @@ class _HomeScreenState extends State<HomeScreen>
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => StudyTipsPage(),
+                                builder: (context) => const StudyTipsPage(),
                               ));
                         },
                       ),

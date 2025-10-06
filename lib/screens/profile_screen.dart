@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:study_mate_app/auth/login.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import '../theme/app_theme.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -29,6 +31,173 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
   void dispose() {
     _animationController.dispose();
     super.dispose();
+  }
+
+  // Logout function with confirmation dialog
+  Future<void> _handleLogout() async {
+    // Show confirmation dialog
+    final confirmed = await _showLogoutConfirmationDialog();
+    
+    if (confirmed == true) {
+      try {
+        // Sign out from Supabase
+        await Supabase.instance.client.auth.signOut();
+        
+        // Navigate to Login page and clear navigation stack
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => Login()),
+          (route) => false,
+        );
+        
+        // Show success message
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Logged out successfully"),
+            backgroundColor: AppTheme.successColor,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      } catch (e) {
+        // Show error message if logout fails
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Logout failed: ${e.toString()}"),
+            backgroundColor: AppTheme.errorColor,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      }
+    }
+  }
+
+  // Confirmation dialog matching StudyMate theme
+  Future<bool?> _showLogoutConfirmationDialog() {
+    return showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          backgroundColor: AppTheme.surfaceColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(25),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Logout Icon
+                Container(
+                  padding: const EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    color: AppTheme.errorColor.withOpacity(0.2),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    Icons.logout_rounded,
+                    size: 40,
+                    color: AppTheme.errorColor,
+                  ),
+                ),
+                
+                const SizedBox(height: 20),
+                
+                // Title
+                Text(
+                  'Logout Confirmation',
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.w700,
+                    color: AppTheme.primaryTextColor,
+                  ),
+                ),
+                
+                const SizedBox(height: 15),
+                
+                // Message
+                Text(
+                  'Are you sure you want to logout from StudyMate?',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: AppTheme.secondaryTextColor,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                
+                const SizedBox(height: 25),
+                
+                // Action Buttons
+                Row(
+                  children: [
+                    // Cancel Button
+                    Expanded(
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: AppTheme.secondaryTextColor.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: TextButton(
+                          onPressed: () => Navigator.of(context).pop(false),
+                          style: TextButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                          ),
+                          child: Text(
+                            'Cancel',
+                            style: TextStyle(
+                              color: AppTheme.primaryTextColor,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    
+                    const SizedBox(width: 15),
+                    
+                    // Logout Button
+                    Expanded(
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: AppTheme.errorColor,
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppTheme.errorColor.withOpacity(0.3),
+                              blurRadius: 8,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: TextButton(
+                          onPressed: () => Navigator.of(context).pop(true),
+                          style: TextButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                          ),
+                          child: const Text(
+                            'Logout',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -94,9 +263,9 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            _buildStatItem('999+', 'Notes'),
-                            _buildStatItem('10.0', 'CGPA'),
-                            _buildStatItem('100%', 'Attendance'),
+                            _buildStatItem('30', 'Notes'),
+                            _buildStatItem('8.5', 'CGPA'),
+                            _buildStatItem('87%', 'Attendance'),
                           ],
                         ),
                       ],
@@ -141,6 +310,16 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                     AppTheme.secondaryTextColor,
                     () {},
                   ),
+                  
+                  // Add Logout Menu Item
+                  _buildMenuItem(
+                    'Logout',
+                    Icons.logout_rounded,
+                    AppTheme.errorColor, // Use red color for logout to indicate danger
+                    _handleLogout, // Call the logout function
+                  ),
+                  
+                  const SizedBox(height: 20), // Extra spacing at bottom
                 ],
               ),
             ),

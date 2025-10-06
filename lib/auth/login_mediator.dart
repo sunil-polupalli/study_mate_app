@@ -4,6 +4,8 @@ import 'package:study_mate_app/main.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthGate extends StatefulWidget {
+  const AuthGate({super.key});
+
   @override
   State<AuthGate> createState() => _AuthGateState();
 }
@@ -22,7 +24,7 @@ class _AuthGateState extends State<AuthGate> {
       if (event == AuthChangeEvent.signedIn && session != null) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (_) => MainScreen()),
+          MaterialPageRoute(builder: (_) => const MainScreen()),
         );
       } else if (event == AuthChangeEvent.signedOut) {
         Navigator.pushReplacement(
@@ -36,6 +38,6 @@ class _AuthGateState extends State<AuthGate> {
   @override
   Widget build(BuildContext context) {
     final session = supabase.auth.currentSession;
-    return session == null ? Login() : MainScreen();
+    return session == null ? Login() : const MainScreen();
   }
 }
