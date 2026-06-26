@@ -35,7 +35,6 @@ Monitor your academic performance at a glance. View your overall statistics incl
 
 ## 📸 App Screenshots
 
-*(Note: Ensure you place your screenshot files in a `screenshots` folder at the root of the project with the names below to view them here)*
 
 | Home Dashboard | Study Rooms |
 | :---: | :---: |
