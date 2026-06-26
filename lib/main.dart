@@ -34,7 +34,7 @@ class StudyMateApp extends StatelessWidget {
     return MaterialApp(
       title: 'StudyMate',
       theme: AppTheme.darkTheme,
-      home: AuthGate(),
+      home: MainScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

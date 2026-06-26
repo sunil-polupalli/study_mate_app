@@ -167,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen>
                     physics: const NeverScrollableScrollPhysics(),
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,
-                    childAspectRatio: 1.1,
+                    childAspectRatio: 1.0,
                     children: [
                       QuickAccessCard(
                         title: 'Notes',
@@ -194,7 +194,7 @@ class _HomeScreenState extends State<HomeScreen>
                         },
                       ),
                       QuickAccessCard(
-                        title: 'Attendence Calc',
+                        title: 'Attendence',
                         icon: Icons.quiz_rounded,
                         color: AppTheme.accentColor,
                         onTap: () {
